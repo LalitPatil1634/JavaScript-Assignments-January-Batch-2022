@@ -1,0 +1,23 @@
+
+---------------------HTML---------------------
+
+<!-- HTML here -->
+<input id="evaluatedText" value="">
+<h3 id="letterCount">0</h3>
+
+---------------------CSS---------------------
+
+No code for CSS
+
+---------------------JavaScript---------------------
+
+// JS code here
+const text = document.getElementById("evaluatedText");
+document.getElementById("evaluatedText").addEventListener("input", myFunction);
+function myFunction() {
+    if (text.value == "") {
+        document.getElementById("letterCount").innerHTML = 0;
+    } else {
+        document.getElementById("letterCount").innerHTML = text.value.length;
+    }
+}

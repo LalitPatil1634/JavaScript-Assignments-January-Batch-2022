@@ -1,0 +1,68 @@
+---------------------HTML---------------------
+
+<input type="number" min="1" max="9" id="wall_id">
+   <input id="wall_color">
+  <button id="apply" onclick="changeHandler()">Change</button>
+  <button id="reset"onclick="resetHandler()">Reset</button> <br><br>
+ 
+  <div id="1" value="1"></div>
+   <div id="2" value="2"></div>
+    <div id="3" value="3"></div>
+   <div id="4" value="4"></div>
+   <div id="5" value="5"></div>
+   <div id="6" value="6"></div>
+   <div id="7" value="7"></div>
+   <div id="8" value="8"></div>
+   <div id="9" value="9"></div>
+
+---------------------CSS---------------------
+
+div {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    display: inline-block;
+}
+header {
+    display: flex;
+}
+
+---------------------JavaScript---------------------
+
+function changeHandler(){
+    // document.querySelector("`#${colorid}`").style.background=`${color}`
+    var divs=document.querySelectorAll("div")
+    divs.forEach(function findTarget(div){
+      if(div.getAttribute("id")==colorid){
+        div.style.background=color
+
+      }
+      else{
+        div.style.background="none"
+
+      }
+    })
+
+  }
+  function resetHandler(){
+    var divs=document.querySelectorAll("div")
+
+    divs.forEach(function findTarget(div){
+      
+        div.style.background="none"
+
+
+    })
+  }
+  var coloridvalue=document.querySelector("#wall_id")
+  var colorid
+  var colorvalue=document.querySelector("#wall_color")
+  var color
+  colorvalue.addEventListener('input', updateValuecolour);
+  coloridvalue.addEventListener('input', updateValueid);
+  function updateValueid(e) {
+    colorid= e.target.value;
+  }
+  function updateValuecolour(e) {
+    color= e.target.value;
+  }
