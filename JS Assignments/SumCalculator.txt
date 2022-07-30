@@ -1,0 +1,21 @@
+Done By Lalit Patil....
+
+---------------------HTML---------------------
+
+<div style='margin-left: 10%;'>
+    <h3>Add Two Numbers</h3>
+    <!--write your code here-->
+    <input type="number" id="num1" /><br>
+    <input type="number" id="num2" /><br>
+    <input type="number" id="result" disabled />
+    <button id="mybtn" onclick="totalSum()">Sum</button><br>
+</div>
+
+---------------------JavaScript--------------------
+
+function totalSum() {
+    const num1Node = parseFloat(document.getElementById('num1').value);
+    const num2Node = parseFloat(document.getElementById('num2').value);
+    const resultNode = num1Node + num2Node;
+    document.getElementById('result').value = resultNode;
+}

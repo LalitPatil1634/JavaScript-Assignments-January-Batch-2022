@@ -1,0 +1,59 @@
+Done By Lalit Patil....
+
+---------------------HTML---------------------
+
+<div id="app" class="day">
+    <p>I am a Newton School student, ready to become an awesome full stack developer</p>
+    <button onclick="swapTheme()" id="swap" class="button_day">Toggle theme</button>
+</div>
+
+---------------------CSS---------------------
+
+.day {
+    background-color: white;
+    color: black;
+}
+
+.night {
+    background-color: black;
+    color: gold;
+}
+
+.button_night {
+    background-color: darkblue;
+    color: white;
+}
+
+.button_day{
+    background-color: white;
+    color: black;
+}
+
+html, body {
+    margin: 0px;
+    height: 100%;
+}
+
+#app {
+    height: 100%;
+    padding: 10px;
+}
+
+---------------------JavaScript---------------------
+
+let mouseEnabled = false;
+const flipSwitch = () => mouseEnabled = !mouseEnabled
+function swapTheme() {
+
+
+    if (!mouseEnabled) {
+        document.getElementById("app").setAttribute("class", "night");
+        document.getElementById("swap").setAttribute("class", "button_night");
+        flipSwitch()
+    } else {
+        document.getElementById("app").setAttribute("class", "day");
+        document.getElementById("swap").setAttribute("class", "button_day");
+        flipSwitch()
+    }
+
+}

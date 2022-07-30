@@ -1,0 +1,39 @@
+
+---------------------HTML---------------------
+
+<div id="box"></div>
+
+---------------------CSS---------------------
+
+#box {
+    width: 100px;
+    height: 100px;
+    background: red;
+    transition: transform 2s;
+}
+.nor{
+    transform: rotate(180deg);
+}
+.active{
+    transform: rotate(0);
+
+}
+
+---------------------JavaScript---------------------
+
+let box = document.querySelector('div')
+
+  let count = 0;
+box.addEventListener('mouseover',()=>{
+ 
+  count ++
+ if(count % 2 == 1){
+     box.classList.add('nor')
+     box.classList.remove('active')
+ }else if(count % 2 == 0){
+     box.classList.remove('nor')
+     box.classList.add('active')
+
+ }
+   
+})
