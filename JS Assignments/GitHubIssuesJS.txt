@@ -1,0 +1,84 @@
+----------------HTML-----------------
+
+<div class="container">
+          <h1 id="heading">Page number 1</h1>
+          <ol id="list">
+          </ol>
+          <div class="buttons">
+               <button id="load_prev">Prev</button>
+               <button id="load_next">Next</button>
+          </div>
+     </div>
+
+------------------CSS-----------------------
+
+     *{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body{
+     height: 100vh;
+     width: 100vw;
+     display: grid;
+     place-content: center;
+}
+.container{
+     width: 500px;
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+}
+#heading{
+     text-align: center;
+}
+.buttons{
+     display: flex;
+     justify-content: space-between;
+}
+.buttons button{
+     background-color: rgb(20, 91, 199);
+     padding: .4rem 1rem;
+     font-size: 1.2rem;
+     border-radius: .2rem;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     color: #fff;
+}
+
+-------------------JavaScript------------------
+
+const heading = document.getElementById('heading');
+const next = document.getElementById('load_next');
+const prev = document.getElementById('load_prev');
+const list = document.getElementById('list');
+let pageNumber = 1;
+
+function getIssues(pageNumber) {
+     return fetch(`https://api.github.com/repositories/1296269/issues?page=${pageNumber}&per_page=5`)
+          .then(res => res.json()).then(res => res);
+}
+
+async function renderIssues(pageNumber) {
+     let issues = await getIssues(pageNumber);
+     list.innerHTML = '';
+     heading.innerHTML = `Page number ${pageNumber}`;
+     issues.forEach(issue => {
+          let li = document.createElement('li');
+          li.innerHTML = issue.node_id;
+          list.appendChild(li);
+     });
+}
+renderIssues(1);
+
+next.addEventListener('click', () => {
+     pageNumber++;
+     renderIssues(pageNumber);
+})
+prev.addEventListener('click', () => {
+     if (pageNumber > 1) {
+          pageNumber--;
+          renderIssues(pageNumber);
+     }
+})

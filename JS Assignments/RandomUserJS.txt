@@ -1,0 +1,130 @@
+------------HTML-----------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Random User</title>
+     
+</head>
+<body>
+     <div class="container">
+          <div class="img-container">
+               <img src="" id="image" alt="img">
+          </div>
+          <h1 id="name">Javid Ahmad Raina</h1>
+          <div class="buttons">
+               <button id="age" data-attr = "age">Age</button>
+               <button id="email" data-attr = "email">Email</button>
+               <button id="phone" data-attr = "phone">Phone</button>
+          </div>
+          <section>
+               <h1 id="additional-info">Additional info</h1>
+          </section>
+          <button id="getUser">Get User</button>
+     </div>
+     
+</body>
+</html>
+
+--------------CSS----------------
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+body{
+     height: 100vh;
+     width: 100vw;
+     display: grid;
+     place-content: center;
+}
+.container{
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+}
+.img-container{
+     height: 250px;
+     width: 250px;
+     margin: 0 auto;
+     border-radius: .5rem;
+     border: 4px solid black;
+}
+.img-container img{
+     width: 100%;
+     height: 100%;
+     border-radius: .5rem;
+}
+#name{
+     text-align: center;
+}
+.buttons{
+     display: flex;
+     justify-content: space-around;
+     gap: 1rem;
+}
+.buttons button, #getUser{
+     width: 100px;
+     height: 35px;
+     font-size: 1.1rem;
+     color: #fff;
+     background-color: #5886b1;
+     cursor: pointer;
+     outline: none;
+     border: none;
+     border-radius: .4rem;
+}
+#additional-info{
+     text-align: center;
+}
+#getUser{
+     width: 150px;
+     height: 40px;
+     background-color: #0b66bb;
+}
+
+---------------JavaScript----------------
+
+const imageElement = document.getElementById('image');
+const nameElement = document.getElementById('name');
+const ageButton = document.getElementById('age');
+const emailButton = document.getElementById('email');
+const phoneButton = document.getElementById('phone');
+const additionalInfoElement = document.getElementById('additional-info');
+const getUserButton = document.getElementById('getUser');
+
+const RANDOM_USER_API = "https://randomuser.me/api/";
+let age = 24;
+let email = "rainajavid15@gmail.com";
+let phone = "(+91) 9797555369";
+
+function getRandomUser(){
+     return fetch(RANDOM_USER_API).then(res => res.json()).then(res => res.results[0]);
+}
+
+async function renderRandomUser(){
+     let randomUser = await getRandomUser();
+     imageElement.src = randomUser.picture.large;
+     nameElement.innerText = `${randomUser.name.first} ${randomUser.name.last}`;
+     age = randomUser.dob.age;
+     email = randomUser.email;
+     phone = randomUser.phone;
+     console.log(randomUser);
+}
+
+renderRandomUser();
+
+ageButton.addEventListener('click', _ => {
+     additionalInfoElement.innerText = age;
+});
+emailButton.addEventListener('click', _ => {
+     additionalInfoElement.innerText = email;
+});
+phoneButton.addEventListener('click', _ => {
+     additionalInfoElement.innerText = phone;
+});
+
+getUserButton.addEventListener('click', renderRandomUser);
