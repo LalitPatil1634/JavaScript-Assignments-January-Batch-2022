@@ -1,0 +1,129 @@
+--------------------HTML------------------
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Annie Use Your Telescope' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            TIP CALCULATOR
+        </div>
+        <div>
+            <div>
+                <p>How much was your bill?</p>
+                ₹ <input type="number" id="billamt"placeholder="Amount to be paid">
+                <p>How was the service?</p>
+                <select id="serviceQual">
+                <option selected="" disabled="" hidden="">
+                    Select
+                </option>
+                <option value="0.05">5% - Terrible</option>
+                <option value="0.1">10% - Bad</option>
+                <option value="0.15">15% - It Was Ok</option>
+                <option value="0.2">20% - Good</option>
+                <option value="0.25">25% - Great</option>
+                <option value="0.3">30% - Outstanding</option>
+            </select>
+                <p>Total number of persons</p>
+                <input type="number" id="peopleamt"  placeholder="Number of people sharing the bill"><br>
+                <button id="calculate">Calculate</button>
+            </div>
+            <div class="tip">
+                <p>Tip Amount</p>
+                ₹ <span id="total">0.10</span>
+                <span id="each" style="display: none;">each</span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+----------------------CSS-----------------------
+body {
+    background-color: grey;
+    text-align: center;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.container {
+
+    width: 300px;
+    height: 515px;
+    border-radius: 25px;
+    background-color: honeydew;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.header
+{
+    font-family: 'Annie Use Your Telescope';
+    background-color: black;
+    color: rgb(241, 173, 173);
+    font-size: 25px;
+    text-align: center;
+    height: 50px; 
+     width: 300px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: 15px;
+}
+button {
+margin: 20px auto;
+width: 150px;
+height: 50px;
+background-color: black;
+color: rgb(156, 111, 111);
+font-size: 20px;
+border: none;
+border-radius: 5px;
+}
+button:hover{
+   color: rgb(178, 241, 67);
+}
+input,
+select {
+width: 85%;
+border: none;
+border-bottom: 1px solid green;
+padding: 10px;
+border-radius: 8px;
+}
+
+--------------------JavaScript---------------------
+
+window.onload = () => {
+    document.querySelector('#calculate').onclick = calculateTip;
+}
+
+function calculateTip()
+{
+    var bill = document.querySelector("#billamt").value;
+    var tipPercentage = document.querySelector("#serviceQual").value;
+    var persons = document.querySelector("#peopleamt").value;
+    if(bill === '' || tipPercentage === 'Select' || persons === '')
+    {
+        alert("Please Enter Bill Amount");
+        return;
+    }
+    if(persons === '1')
+    {
+        document.querySelector('#each').style.display = 'none';
+    }
+    else
+    {
+        document.querySelector('#each').style.display = 'block';
+    }
+    var tip=(bill*tipPercentage)/persons;
+    tip=tip.toFixed(2);
+    document.getElementById("total").innerHTML=tip;
+}
