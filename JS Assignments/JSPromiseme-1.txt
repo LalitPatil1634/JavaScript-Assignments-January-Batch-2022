@@ -1,7 +1,7 @@
-function promiseFun(time, data) {
-    return new Promise(function(result) {
-        setTimeout( () => {
-            result(data);
-        }, 1000)
-    })
+function promiseMe(time, data) {
+    return new Promise(function(res) {
+        setTimeout( ()=> {
+            res(data);
+        }, 1000);
+    });
 }
