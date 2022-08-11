@@ -1,0 +1,86 @@
+------------------HTML------------------
+
+<div class="container">
+    <div id="notepad">
+        <div id="header">
+            <div id="heading">Online Notepad</div>
+            <div>
+                <label for="feature-flag">Save My Note</label>
+                <input type="checkbox" name="save my note" id="feature-flag">
+            </div>
+        </div>
+        <textarea name="textarea" id="textarea" placeholder="Write your notes here" ></textarea>
+    </div>
+</div>
+
+--------------------------CSS-------------------
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    width: 70%;
+    height: auto;
+    margin: 50px auto 0px auto;
+    border: 1px solid black;
+}
+
+ul {
+    list-style: none;
+    display: none;
+}
+
+select {
+    border: none;
+    font-size: 1rem;
+
+}
+
+select:focus {
+    outline: none;
+}
+
+#header {
+    width: 100%;
+    padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: white;
+}
+#textarea {
+    height: 500px;
+    width: 500px;
+}
+
+
+---------------------JavaScript----------------
+
+let textarea = document.getElementById('textarea');
+let featureflag = document.getElementById('feature-flag');
+
+function firstLoad() {
+    if (window.localStorage.getItem("autosave-data")) {
+        textarea.value = window.localStorage.getItem("autosave-data");
+    }
+}
+
+function updateLocalStorage() {
+    setInterval(() => {
+        var inputData = textarea.value;
+        if (featureflag.checked) {
+            window.localStorage.setItem("autosave-data", inputData);
+        }
+    },1000)
+}
+firstLoad();
+updateLocalStorage();
